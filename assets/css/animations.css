@@ -1,0 +1,89 @@
+/* animations.css — Transitions, confetti, shake, pop, flip */
+
+/* ── Shake (mauvaise réponse) ─────────────────────────────── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%, 55%  { transform: translateX(-9px); }
+  35%, 75%  { transform: translateX(9px); }
+}
+
+.shk { animation: shake 0.42s var(--ease-apple); }
+
+/* ── Pop (apparition élément) ─────────────────────────────── */
+@keyframes pop {
+  0%   { transform: scale(0.75); opacity: 0; }
+  60%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pop { animation: pop 0.35s var(--ease-bounce); }
+
+/* ── Fade in (vue générique) ──────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-in { animation: fade-in var(--dur-base) var(--ease-apple); }
+
+/* ── Slide up (modals, sheets) ────────────────────────────── */
+@keyframes slide-up {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+.slide-up { animation: slide-up var(--dur-base) var(--ease-apple); }
+
+/* ── Confetti canvas ──────────────────────────────────────── */
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ── Ring progress animation ──────────────────────────────── */
+@keyframes ring-draw {
+  from { stroke-dashoffset: var(--ring-circumference); }
+  to   { stroke-dashoffset: var(--ring-offset); }
+}
+
+.ring-fill {
+  animation: ring-draw 0.9s var(--ease-apple) forwards;
+  stroke-dasharray: var(--ring-circumference);
+  stroke-dashoffset: var(--ring-circumference);
+}
+
+/* ── Pulse (exam urgent) ──────────────────────────────────── */
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+/* ── Bounce scale (feedback correct) ─────────────────────── */
+@keyframes bounce-scale {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  70%  { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+
+.bounce-scale { animation: bounce-scale 0.4s var(--ease-bounce); }
+
+/* ── Card flip hint ───────────────────────────────────────── */
+@keyframes flip-hint {
+  0%   { transform: rotateY(0deg); }
+  8%   { transform: rotateY(12deg); }
+  16%  { transform: rotateY(0deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+.flip-hint { animation: flip-hint 2.5s var(--ease-apple) 1.5s 1; }
+
+/* ── Streak fire ──────────────────────────────────────────── */
+@keyframes fire {
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50%       { transform: scale(1.15) rotate(3deg); }
+}
+
+.fire { animation: fire 1.2s ease-in-out infinite; }

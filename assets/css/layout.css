@@ -1,0 +1,425 @@
+/* layout.css — Structure, navigation, vues */
+
+/* ── Top Bar ──────────────────────────────────────────────── */
+.top {
+  height: var(--top-height);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+  z-index: 100;
+  position: relative;
+}
+
+.top h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-headline);
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--label-primary);
+}
+
+.top-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  background: var(--fill-quaternary);
+  color: var(--blue);
+  transition:
+    background var(--dur-fast) var(--ease-apple),
+    transform var(--dur-fast) var(--ease-apple);
+  flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.top-btn:active {
+  background: var(--fill-secondary);
+  transform: scale(0.91);
+}
+
+/* ── Main App Container ───────────────────────────────────── */
+#app {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* ── Vues ─────────────────────────────────────────────────── */
+.vw {
+  padding: 20px 16px calc(var(--nav-height) + 20px);
+  min-height: 100%;
+  animation: view-in var(--dur-fast) var(--ease-apple);
+}
+
+@keyframes view-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Bottom Navigation — Style iOS Tabbar ────────────────── */
+.nv {
+  height: var(--nav-height);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 10px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 0.5px solid var(--separator);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.ni {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3px;
+  padding: 4px 4px 0;
+  font-size: var(--text-caption2);
+  font-weight: 500;
+  color: var(--label-tertiary);
+  transition: color var(--dur-fast) var(--ease-apple);
+  -webkit-user-select: none;
+  user-select: none;
+  min-height: 44px;
+  position: relative;
+}
+
+.ni .ic {
+  font-size: 22px;
+  line-height: 1;
+  transition: transform var(--dur-fast) var(--ease-bounce);
+  position: relative;
+  z-index: 1;
+}
+
+/* Pill indicator iOS-style */
+.ni.on::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 32px;
+  background: rgba(0,122,255,0.12);
+  border-radius: var(--radius-pill);
+  transition: all var(--dur-base) var(--ease-apple);
+}
+
+.ni.on {
+  color: var(--blue);
+}
+
+.ni.on .ic {
+  transform: scale(1.08);
+}
+
+.ni:active .ic {
+  transform: scale(0.84);
+}
+
+.ni .lbl {
+  font-size: var(--text-caption2);
+  letter-spacing: -0.1px;
+}
+
+/* ── Sections Headers ─────────────────────────────────────── */
+.sec {
+  font-family: var(--font-display);
+  font-size: var(--text-subhead);
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin: 24px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--label-secondary);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.sec .ln {
+  flex: 1;
+  height: 0.5px;
+  background: var(--separator);
+}
+
+/* ── Grouped list sections (iOS style) ───────────────────── */
+.group {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.group-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 0.5px solid var(--separator);
+  transition: background var(--dur-fast) var(--ease-apple);
+  min-height: 44px;
+}
+
+.group-item:last-child { border-bottom: none; }
+.group-item:active { background: var(--fill-quaternary); }
+
+/* ── Progress bar ─────────────────────────────────────────── */
+.pb {
+  height: 4px;
+  background: var(--fill-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.pf {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s var(--ease-apple);
+}
+
+.sp {
+  font-size: var(--text-caption1);
+  color: var(--label-tertiary);
+  text-align: center;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Stats grid ───────────────────────────────────────────── */
+.sr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sc {
+  text-align: center;
+  padding: 16px 8px;
+}
+
+.sv {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.sl {
+  font-size: var(--text-caption1);
+  color: var(--label-tertiary);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* ── Deck Grid ────────────────────────────────────────────── */
+.dg {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+.empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--label-tertiary);
+}
+
+.empty .ic {
+  font-size: 48px;
+  margin-bottom: 12px;
+  display: block;
+  opacity: 0.6;
+}
+
+.empty p {
+  font-size: var(--text-subhead);
+  line-height: 1.5;
+}
+
+/* ── Fiche layout ─────────────────────────────────────────── */
+.fct {
+  font-size: var(--text-subhead);
+  line-height: 1.78;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--label-primary);
+}
+
+.fti {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.fn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  gap: 12px;
+}
+
+/* ── Bar chart ────────────────────────────────────────────── */
+.bc {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 120px;
+  padding: 8px 0 0;
+}
+
+.bcl {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.bar {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  min-height: 3px;
+  transition: height 0.6s var(--ease-apple);
+}
+
+.bla {
+  font-size: 10px;
+  color: var(--label-tertiary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bva {
+  font-size: 10px;
+  color: var(--label-secondary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Activity calendar ────────────────────────────────────── */
+.stc {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.std {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--label-tertiary);
+  background: var(--fill-quaternary);
+}
+
+.std.on {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ── Ring stats (Apple Health style) ─────────────────────── */
+.rings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.ring-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.ring-svg {
+  width: 72px;
+  height: 72px;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.ring-fill {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s var(--ease-apple);
+}
+
+.ring-label {
+  font-size: var(--text-caption1);
+  font-weight: 600;
+  color: var(--label-primary);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.ring-pct {
+  font-size: var(--text-footnote);
+  font-weight: 700;
+  color: var(--label-secondary);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (min-width: 600px) {
+  .vw { padding: 24px 28px calc(var(--nav-height) + 24px); }
+  .dg { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+}
+
+@media (min-width: 900px) {
+  .nv {
+    left: auto;
+    right: auto;
+    width: 480px;
+    margin: 0 auto;
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+    border: 0.5px solid var(--separator);
+    border-bottom: none;
+  }
+}
