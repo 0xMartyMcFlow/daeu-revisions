@@ -2,6 +2,10 @@
  * SVG icon system — Apple SF Symbols style
  * Usage: icons.FLAME  →  SVG string à injecter via innerHTML
  * Taille par défaut : 20×20, stroke currentColor
+ *
+ * Sources SVG libres :
+ *   - Lucide Icons (MIT) https://lucide.dev
+ *   - Heroicons (MIT)    https://heroicons.com
  */
 
 const i = (d, opts = '') =>
@@ -51,13 +55,52 @@ export const icons = {
   MOON:   f('<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#5AC8FA"/>'),
   SUN:    f('<circle cx="12" cy="12" r="5" fill="#FFD60A"/><line x1="12" y1="1" x2="12" y2="3" stroke="#FFD60A" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="21" x2="12" y2="23" stroke="#FFD60A" stroke-width="2" stroke-linecap="round"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="#FFD60A" stroke-width="2" stroke-linecap="round"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="#FFD60A" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="12" x2="3" y2="12" stroke="#FFD60A" stroke-width="2" stroke-linecap="round"/><line x1="21" y1="12" x2="23" y2="12" stroke="#FFD60A" stroke-width="2" stroke-linecap="round"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="#FFD60A" stroke-width="2" stroke-linecap="round"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="#FFD60A" stroke-width="2" stroke-linecap="round"/>'),
   HOUSE:  i('<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'),
+
+  // ── Matières (deck subjects) — Lucide Icons MIT ───────────
+  //
+  // SUBJECT_EN   : globe avec méridiens  → langue internationale
+  // SUBJECT_LIT  : livre ouvert          → littérature
+  // SUBJECT_ARG  : stylo / crayon        → rédaction / argumentation
+  // SUBJECT_GEO  : globe plein           → géographie mondiale
+  // SUBJECT_HIST : colonnes de temple    → histoire / antiquité
+  //
+  SUBJECT_EN: i(
+    '<circle cx="12" cy="12" r="10"/>' +
+    '<line x1="2" y1="12" x2="22" y2="12"/>' +
+    '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
+  ),
+
+  SUBJECT_LIT: i(
+    '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>' +
+    '<path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>'
+  ),
+
+  SUBJECT_ARG: i(
+    '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>'
+  ),
+
+  SUBJECT_GEO: i(
+    '<circle cx="12" cy="12" r="10"/>' +
+    '<path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>' +
+    '<path d="M2 12h20"/>'
+  ),
+
+  SUBJECT_HIST: i(
+    '<line x1="3" y1="22" x2="21" y2="22"/>' +
+    '<line x1="6" y1="18" x2="6" y2="11"/>' +
+    '<line x1="10" y1="18" x2="10" y2="11"/>' +
+    '<line x1="14" y1="18" x2="14" y2="11"/>' +
+    '<line x1="18" y1="18" x2="18" y2="11"/>' +
+    '<polygon points="12 2 20 7 4 7"/>'
+  ),
+
 };
 
 /**
  * Retourne un SVG redimensionné
  * @param {string} key   - clé dans icons
  * @param {number} size  - px (défaut 20)
- * @param {string} color - couleur CSS optionnelle
+ * @param {string} color - couleur CSS optionnelle (remplace currentColor)
  */
 export function icon(key, size = 20, color) {
   let svg = icons[key] ?? icons.XMARK;
