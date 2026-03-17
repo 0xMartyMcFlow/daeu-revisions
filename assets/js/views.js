@@ -5,6 +5,7 @@ import { getProgress, getTodayCount, getStreak,
 import { countDue }                                from './sm2.js';
 import { navigate }                                from './router.js';
 import { createRing, applyTheme, showToast }       from './ui.js';
+import { icon }                                    from './icons.js';
 
 const app = () => document.getElementById('app');
 
@@ -17,19 +18,19 @@ export function renderHome() {
   const goal     = settings.dailyGoal ?? 20;
   const goalPct  = Math.min(100, Math.round((today / goal) * 100));
   const progress = getProgress();
-
-  const totalDue = DECKS.reduce((acc, d) =>
-    acc + countDue(d.cards, progress), 0);
+  const totalDue = DECKS.reduce((acc, d) => acc + countDue(d.cards, progress), 0);
 
   app().innerHTML = `
     <div class="view">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-5)">
         <div>
           <div style="font-size:var(--text-xs);color:var(--label-secondary);font-weight:600;text-transform:uppercase;letter-spacing:0.06em">DAEU Révisions</div>
-          <h1 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;letter-spacing:-0.8px;line-height:1.1">Bonne révision 👋</h1>
+          <h1 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;letter-spacing:-0.8px;line-height:1.1">Bonne révision</h1>
         </div>
-        <div style="text-align:right">
-          <div style="font-size:var(--text-2xl);font-weight:700;font-family:var(--font-display);color:var(--orange)">🔥 ${streak}</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+          <div style="display:flex;align-items:center;gap:4px;font-size:var(--text-xl);font-weight:700;font-family:var(--font-display);color:var(--orange)">
+            ${icon('FLAME', 22)} ${streak}
+          </div>
           <div style="font-size:var(--text-xs);color:var(--label-secondary)">jours consécutifs</div>
         </div>
       </div>
@@ -39,27 +40,16 @@ export function renderHome() {
           <span style="font-weight:600;font-size:var(--text-base)">Objectif du jour</span>
           <span style="font-size:var(--text-sm);color:var(--label-secondary)">${today} / ${goal} cartes</span>
         </div>
-        <div class="progress-bar" id="goal-bar">
-          <div class="progress-fill" style="width:${goalPct}%;background:var(--green)"></div>
-        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${goalPct}%;background:var(--green)"></div></div>
         ${totalDue > 0
-          ? `<div style="margin-top:var(--sp-2);font-size:var(--text-sm);color:var(--red);font-weight:600">⚡ ${totalDue} carte${totalDue > 1 ? 's' : ''} à réviser</div>`
-          : `<div style="margin-top:var(--sp-2);font-size:var(--text-sm);color:var(--green);font-weight:600">✅ Tout est à jour !</div>`}
+          ? `<div style="display:flex;align-items:center;gap:6px;margin-top:var(--sp-2);font-size:var(--text-sm);color:var(--red);font-weight:600">${icon('BOLT',16)} ${totalDue} carte${totalDue > 1 ? 's' : ''} à réviser</div>`
+          : `<div style="display:flex;align-items:center;gap:6px;margin-top:var(--sp-2);font-size:var(--text-sm);color:var(--green);font-weight:600">${icon('CHECK_CIRCLE',16)} Tout est à jour !</div>`}
       </div>
 
       <div class="stats-grid" style="margin-bottom:var(--sp-4)">
-        <div class="card stat-card">
-          <div class="stat-value" style="color:var(--blue)">${today}</div>
-          <div class="stat-label">Aujourd'hui</div>
-        </div>
-        <div class="card stat-card">
-          <div class="stat-value" style="color:var(--orange)">🔥${streak}</div>
-          <div class="stat-label">Streak</div>
-        </div>
-        <div class="card stat-card">
-          <div class="stat-value" style="color:var(--red)">${totalDue}</div>
-          <div class="stat-label">Dues</div>
-        </div>
+        <div class="card stat-card"><div class="stat-value" style="color:var(--blue)">${today}</div><div class="stat-label">Aujourd'hui</div></div>
+        <div class="card stat-card"><div class="stat-value" style="display:flex;align-items:center;justify-content:center;gap:4px;color:var(--orange)">${icon('FLAME',18)} ${streak}</div><div class="stat-label">Streak</div></div>
+        <div class="card stat-card"><div class="stat-value" style="color:var(--red)">${totalDue}</div><div class="stat-label">Dues</div></div>
       </div>
 
       <h2 class="section-title sm">Matières</h2>
@@ -79,19 +69,18 @@ export function renderHome() {
 
       <h2 class="section-title sm" style="margin-top:var(--sp-6)">Mode Examen</h2>
       <div class="card" style="padding:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4);cursor:pointer" id="exam-entry">
-        <div style="font-size:2rem">🎯</div>
+        <span class="icon icon-2xl" style="color:var(--blue)">${icon('TARGET', 36)}</span>
         <div style="flex:1">
           <div style="font-weight:700;font-size:var(--text-base)">Simulation d'examen</div>
           <div style="font-size:var(--text-sm);color:var(--label-secondary)">Timer • QCM • Score final</div>
         </div>
-        <div style="color:var(--label-tertiary)">›</div>
+        <span class="icon icon-muted">${icon('CHEVRON_RIGHT')}</span>
       </div>
     </div>
   `;
 
-  app().querySelectorAll('.deck-card').forEach(el => {
-    el.addEventListener('click', () => navigate('study', { deckId: el.dataset.deck }));
-  });
+  app().querySelectorAll('.deck-card').forEach(el =>
+    el.addEventListener('click', () => navigate('study', { deckId: el.dataset.deck })));
   document.getElementById('exam-entry')?.addEventListener('click', () => navigate('exam'));
 }
 
@@ -101,7 +90,7 @@ export function renderDecks() {
   const progress = getProgress();
   app().innerHTML = `
     <div class="view">
-      <h1 class="section-title">Mes decks 📚</h1>
+      <h1 class="section-title">Mes decks</h1>
       <div class="deck-grid anim-stagger">
         ${DECKS.map(d => {
           const due     = countDue(d.cards, progress);
@@ -122,10 +111,8 @@ export function renderDecks() {
       </div>
     </div>
   `;
-
-  app().querySelectorAll('.deck-card').forEach(el => {
-    el.addEventListener('click', () => navigate('study', { deckId: el.dataset.deck }));
-  });
+  app().querySelectorAll('.deck-card').forEach(el =>
+    el.addEventListener('click', () => navigate('study', { deckId: el.dataset.deck })));
 }
 
 // ── STATS ────────────────────────────────────────────────
@@ -138,8 +125,7 @@ export function renderStats() {
 
   app().innerHTML = `
     <div class="view">
-      <h1 class="section-title">Statistiques 📊</h1>
-
+      <h1 class="section-title">Statistiques</h1>
       <div class="card" style="padding:var(--sp-4);margin-bottom:var(--sp-4)">
         <div style="font-weight:600;margin-bottom:var(--sp-3)">7 derniers jours</div>
         <div class="bar-chart">
@@ -151,7 +137,6 @@ export function renderStats() {
           </div>`).join('')}
         </div>
       </div>
-
       <h2 class="section-title sm">Maîtrise par matière</h2>
       <div class="card" style="padding:var(--sp-4)">
         <div class="rings-container" id="rings-wrap"></div>
@@ -182,8 +167,7 @@ export function renderSettings() {
   const s = getSettings();
   app().innerHTML = `
     <div class="view">
-      <h1 class="section-title">Réglages ⚙️</h1>
-
+      <h1 class="section-title">Réglages</h1>
       <div class="card" style="padding:0 var(--sp-4)">
 
         <div class="setting-row">
@@ -192,8 +176,8 @@ export function renderSettings() {
             <div class="setting-desc">Sombre ou clair</div>
           </div>
           <div style="display:flex;gap:var(--sp-2)">
-            <button class="btn btn-sm ${s.theme === 'dark'  ? 'btn-primary' : 'btn-secondary'}" data-theme="dark">🌙</button>
-            <button class="btn btn-sm ${s.theme === 'light' ? 'btn-primary' : 'btn-secondary'}" data-theme="light">☀️</button>
+            <button class="btn btn-sm ${s.theme === 'dark'  ? 'btn-primary' : 'btn-secondary'}" data-theme="dark"  style="gap:6px">${icon('MOON',16)} Sombre</button>
+            <button class="btn btn-sm ${s.theme === 'light' ? 'btn-primary' : 'btn-secondary'}" data-theme="light" style="gap:6px">${icon('SUN',16)} Clair</button>
           </div>
         </div>
 
@@ -202,8 +186,7 @@ export function renderSettings() {
             <div class="setting-title">Objectif quotidien</div>
             <div class="setting-desc" id="goal-desc">${s.dailyGoal} cartes par jour</div>
           </div>
-          <input type="range" id="goal-range" min="5" max="100" step="5" value="${s.dailyGoal}"
-            style="width:110px;accent-color:var(--blue)">
+          <input type="range" id="goal-range" min="5" max="100" step="5" value="${s.dailyGoal}" style="width:110px;accent-color:var(--blue)">
         </div>
 
         <div class="setting-row">
@@ -221,11 +204,12 @@ export function renderSettings() {
           </div>
           <span style="color:var(--label-tertiary);font-size:var(--text-sm)">2026</span>
         </div>
-
       </div>
 
       <div style="margin-top:var(--sp-6)">
-        <button class="btn btn-danger btn-full" id="reset-btn">🗑️ Réinitialiser toute la progression</button>
+        <button class="btn btn-danger btn-full" id="reset-btn" style="gap:8px">
+          ${icon('TRASH', 16)} Réinitialiser toute la progression
+        </button>
       </div>
     </div>
   `;
@@ -237,20 +221,17 @@ export function renderSettings() {
       renderSettings();
     });
   });
-
   const range = document.getElementById('goal-range');
   range?.addEventListener('input', () => {
     saveSetting('dailyGoal', parseInt(range.value));
     const desc = document.getElementById('goal-desc');
     if (desc) desc.textContent = `${range.value} cartes par jour`;
   });
-
   document.getElementById('toggle-timer')?.addEventListener('click', function () {
     const val = !getSettings().showTimer;
     saveSetting('showTimer', val);
     this.classList.toggle('on', val);
   });
-
   document.getElementById('reset-btn')?.addEventListener('click', () => {
     if (confirm('Supprimer toute la progression ? Cette action est irréversible.')) {
       clearAll();
@@ -273,7 +254,7 @@ export function renderFiche(deckId, ficheId) {
   app().innerHTML = `
     <div class="view">
       <div style="display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-4)">
-        <button class="btn btn-ghost btn-sm" id="back-btn">‹ Retour</button>
+        <button class="btn btn-ghost btn-sm" id="back-btn" style="gap:4px">${icon('CHEVRON_LEFT',16)} Retour</button>
         <span style="font-size:var(--text-sm);color:var(--label-secondary)">${deck.icon} ${deck.name}</span>
       </div>
       <div class="fiche-title">${fiche.title}</div>
@@ -281,9 +262,9 @@ export function renderFiche(deckId, ficheId) {
         <pre class="fiche-content">${fiche.content}</pre>
       </div>
       <div class="fiche-nav">
-        <button class="btn btn-secondary btn-sm" id="prev-fiche" ${idx === 0 ? 'disabled' : ''}>‹ Précédent</button>
+        <button class="btn btn-secondary btn-sm" id="prev-fiche" style="gap:4px" ${idx === 0 ? 'disabled' : ''}>${icon('CHEVRON_LEFT',14)} Précédent</button>
         <span style="font-size:var(--text-xs);color:var(--label-tertiary)">${idx + 1} / ${fiches.length}</span>
-        <button class="btn btn-secondary btn-sm" id="next-fiche" ${idx === fiches.length - 1 ? 'disabled' : ''}>Suivant ›</button>
+        <button class="btn btn-secondary btn-sm" id="next-fiche" style="gap:4px" ${idx === fiches.length - 1 ? 'disabled' : ''}>Suivant ${icon('CHEVRON_RIGHT',14)}</button>
       </div>
     </div>
   `;
