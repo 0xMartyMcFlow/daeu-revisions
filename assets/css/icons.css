@@ -1,0 +1,29 @@
+/* ================================================================
+   ICON HELPERS
+   ================================================================ */
+
+.icon {
+  display:        inline-flex;
+  align-items:    center;
+  justify-content: center;
+  flex-shrink:    0;
+  vertical-align: middle;
+}
+
+.icon svg {
+  display: block;
+}
+
+/* Tailles */
+.icon-sm  svg { width: 16px; height: 16px; }
+.icon-md  svg { width: 20px; height: 20px; }
+.icon-lg  svg { width: 24px; height: 24px; }
+.icon-xl  svg { width: 32px; height: 32px; }
+.icon-2xl svg { width: 44px; height: 44px; }
+
+/* Couleurs sémantiques */
+.icon-blue   svg { stroke: var(--blue);   }
+.icon-green  svg { stroke: var(--green);  }
+.icon-red    svg { stroke: var(--red);    }
+.icon-orange svg { stroke: var(--orange); }
+.icon-muted  svg { stroke: var(--label-tertiary); }
