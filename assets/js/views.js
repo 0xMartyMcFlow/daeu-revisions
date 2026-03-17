@@ -9,7 +9,7 @@ import { icon }                                    from './icons.js';
 
 const app = () => document.getElementById('app');
 
-// ── HOME ─────────────────────────────────────────────────
+// ── HOME ──────────────────────────────────────────────────
 
 export function renderHome() {
   const today    = getTodayCount();
@@ -60,7 +60,7 @@ export function renderHome() {
           <div class="card deck-card" data-deck="${d.id}">
             <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${d.color};border-radius:var(--r-lg) var(--r-lg) 0 0"></div>
             ${due > 0 ? `<span class="deck-badge">${due}</span>` : ''}
-            <span class="deck-emoji">${d.icon}</span>
+            <span class="deck-icon" style="color:${d.color}">${icon(d.iconKey, 28)}</span>
             <div class="deck-name">${d.name}</div>
             <div class="deck-meta">${d.cards.length} cartes</div>
           </div>`;
@@ -84,7 +84,7 @@ export function renderHome() {
   document.getElementById('exam-entry')?.addEventListener('click', () => navigate('exam'));
 }
 
-// ── DECKS ────────────────────────────────────────────────
+// ── DECKS ───────────────────────────────────────────────
 
 export function renderDecks() {
   const progress = getProgress();
@@ -100,7 +100,7 @@ export function renderDecks() {
           <div class="card deck-card" data-deck="${d.id}">
             <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${d.color};border-radius:var(--r-lg) var(--r-lg) 0 0"></div>
             ${due > 0 ? `<span class="deck-badge">${due}</span>` : ''}
-            <span class="deck-emoji">${d.icon}</span>
+            <span class="deck-icon" style="color:${d.color}">${icon(d.iconKey, 28)}</span>
             <div class="deck-name">${d.name}</div>
             <div class="deck-meta">${donePct}% maîtrisé · ${due} due${due !== 1 ? 's' : ''}</div>
             <div class="progress-bar" style="margin-top:var(--sp-2)">
@@ -153,7 +153,9 @@ export function renderStats() {
     row.appendChild(createRing(pct, d.color, 56, 6));
     row.innerHTML += `
       <div class="ring-info">
-        <div class="ring-subject">${d.icon} ${d.name}</div>
+        <div class="ring-subject" style="display:flex;align-items:center;gap:6px">
+          <span style="color:${d.color};display:flex;align-items:center">${icon(d.iconKey, 16)}</span>${d.name}
+        </div>
         <div class="ring-pct" style="color:${d.color}">${pct}%</div>
         <div class="ring-detail">${done} / ${d.cards.length} cartes vues</div>
       </div>`;
@@ -161,7 +163,7 @@ export function renderStats() {
   });
 }
 
-// ── SETTINGS ─────────────────────────────────────────────
+// ── SETTINGS ───────────────────────────────────────────────
 
 export function renderSettings() {
   const s = getSettings();
@@ -255,7 +257,9 @@ export function renderFiche(deckId, ficheId) {
     <div class="view">
       <div style="display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-4)">
         <button class="btn btn-ghost btn-sm" id="back-btn" style="gap:4px">${icon('CHEVRON_LEFT',16)} Retour</button>
-        <span style="font-size:var(--text-sm);color:var(--label-secondary)">${deck.icon} ${deck.name}</span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:var(--text-sm);color:var(--label-secondary)">
+          <span style="color:${deck.color};display:flex;align-items:center">${icon(deck.iconKey, 14)}</span>${deck.name}
+        </span>
       </div>
       <div class="fiche-title">${fiche.title}</div>
       <div class="card" style="padding:var(--sp-5)">
