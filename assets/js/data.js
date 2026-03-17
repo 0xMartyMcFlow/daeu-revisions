@@ -1,6 +1,6 @@
 export const DECKS = [
   {
-    id: 'eng', name: 'Anglais', icon: '🇬🇧', color: '#FF453A',
+    id: 'eng', name: 'Anglais', iconKey: 'SUBJECT_EN', color: '#FF453A',
     cards: [
       { id: 'e01', f: 'À quoi sert le Present Simple ?', b: 'Actions habituelles, vérités générales, routines.\n• I work every day. / She works hard.\n• Négatif : don\'t / doesn\'t + BV\n• Question : Do/Does + sujet + BV?\nMots-clés : always, often, usually, every day, never' },
       { id: 'e02', f: 'À quoi sert le Present Continuous ?', b: 'Actions en cours, situations temporaires.\n• I am studying right now.\n• Formation : sujet + am/is/are + V-ing\nMots-clés : now, at the moment, currently' },
@@ -29,7 +29,7 @@ export const DECKS = [
     ]
   },
   {
-    id: 'fr1', name: 'Français Littérature', icon: '📖', color: '#0A84FF',
+    id: 'fr1', name: 'Français Littérature', iconKey: 'SUBJECT_LIT', color: '#0A84FF',
     cards: [
       { id: 'f01', f: 'Qui est Eugène Ionesco ?', b: 'Auteur franco-roumain (1909-1994)\nThéâtre de l\'absurde\nŒuvre clé : Rhinocéros (1959)\nÉlu Académie française (1970)\nDénonce le conformisme et les totalitarismes.' },
       { id: 'f02', f: 'Qu\'est-ce que le Théâtre de l\'absurde ?', b: 'Mouvement post-1945.\n• Remise en cause du langage\n• Absence d\'intrigue classique\n• Personnages déshumanisés\n• Situations illogiques / grotesques\nAuteurs : Ionesco, Beckett, Adamov' },
@@ -54,7 +54,7 @@ export const DECKS = [
     ]
   },
   {
-    id: 'fr2', name: 'Français Argumentation', icon: '✍️', color: '#BF5AF2',
+    id: 'fr2', name: 'Français Argumentation', iconKey: 'SUBJECT_ARG', color: '#BF5AF2',
     cards: [
       { id: 'a01', f: 'Qu\'est-ce qu\'un texte argumentatif ?', b: 'Texte où l\'auteur défend une opinion (thèse) avec arguments et exemples.\n\n• Thèse = opinion\n• Arguments = raisons\n• Exemples = preuves concrètes\n• Connecteurs logiques = liens' },
       { id: 'a02', f: 'Convaincre vs Persuader ?', b: 'CONVAINCRE → la RAISON\n• Arguments logiques, faits, stats\n• « Les études montrent que... »\n\nPERSUADER → les SENTIMENTS\n• Émotions, images fortes\n• « Imaginez la souffrance de... »' },
@@ -78,7 +78,7 @@ export const DECKS = [
     ]
   },
   {
-    id: 'geo', name: 'Géographie', icon: '🌍', color: '#30D158',
+    id: 'geo', name: 'Géographie', iconKey: 'SUBJECT_GEO', color: '#30D158',
     cards: [
       { id: 'g01', f: 'Définition de la mondialisation.', b: 'Processus ancien de mise en relation des territoires par des flux de nature et d\'intensité diverses.\n\nPhases :\n• 1492 : 1ère mondialisation\n• 1980 : bouclage du monde\n• 1990s : accélération (Internet, chute URSS)' },
       { id: 'g02', f: 'Les 3 types de flux dans la mondialisation.', b: '1. MATÉRIELS : marchandises, matières premières (90% par mer)\n2. IMMATÉRIELS : capitaux, informations, données numériques\n3. HUMAINS : migrants, réfugiés, touristes (~280M migrants)' },
@@ -102,7 +102,7 @@ export const DECKS = [
     ]
   },
   {
-    id: 'hist', name: 'Histoire', icon: '🏛️', color: '#FF9F0A',
+    id: 'hist', name: 'Histoire', iconKey: 'SUBJECT_HIST', color: '#FF9F0A',
     cards: [
       { id: 'h01', f: 'Bilan de la Première Guerre mondiale.', b: 'Humain : ~10M morts, ~20M blessés\nGrippe espagnole : 50M morts\n\nMatériel : destructions massives, endettement\n\nPolitique : disparition de 4 empires (Ottoman, Autriche-Hongrie, Russie, Allemagne)\nRedécoupage des frontières' },
       { id: 'h02', f: 'Traité de Versailles (1919) : points clés.', b: 'Imposé à l\'Allemagne :\n• Art. 231 : responsabilité de la guerre\n• Perte Alsace-Lorraine → France\n• Armée limitée à 100 000 hommes\n• Réparations colossales (132 Mds marks-or)\n• Démilitarisation Rhénanie\n\n→ Humiliation → terreau du nazisme' },
