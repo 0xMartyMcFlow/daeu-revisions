@@ -1,0 +1,70 @@
+/* ================================================================
+   DESIGN TOKENS — iOS 18 Dark / Light
+   ================================================================ */
+
+:root {
+  /* Spacing */
+  --sp-1:  4px;  --sp-2:  8px;  --sp-3: 12px;
+  --sp-4: 16px;  --sp-5: 20px;  --sp-6: 24px;
+  --sp-7: 28px;  --sp-8: 32px;
+
+  /* Typography */
+  --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  --font-body:    -apple-system, 'SF Pro Text',    'Helvetica Neue', sans-serif;
+  --text-xs:   11px;  --text-sm:  13px;  --text-base: 15px;
+  --text-md:   17px;  --text-lg:  20px;  --text-xl:   24px;
+  --text-2xl:  28px;
+
+  /* Radii */
+  --r-sm:   6px;  --r-md:  10px;  --r-lg:  14px;
+  --r-xl:  18px;  --r-2xl: 22px;  --r-pill: 999px;
+
+  /* Nav */
+  --nav-h: 84px;
+}
+
+/* ---- DARK (défaut) ---- */
+[data-theme='dark'], :root {
+  --bg-primary:    #000000;
+  --bg-secondary:  #1C1C1E;
+  --bg-tertiary:   #2C2C2E;
+  --bg-grouped:    #000000;
+
+  --label-primary:    #FFFFFF;
+  --label-secondary:  rgba(235,235,245,.6);
+  --label-tertiary:   rgba(235,235,245,.3);
+
+  --separator:  rgba(84,84,88,.65);
+  --fill:       rgba(120,120,128,.36);
+
+  --blue:    #0A84FF;  --green:  #30D158;
+  --red:     #FF453A;  --orange: #FF9F0A;
+  --purple:  #BF5AF2;  --teal:   #5AC8FA;
+  --yellow:  #FFD60A;
+
+  --shadow-md: 0 4px 20px rgba(0,0,0,.5);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.7);
+}
+
+/* ---- LIGHT ---- */
+[data-theme='light'] {
+  --bg-primary:    #F2F2F7;
+  --bg-secondary:  #FFFFFF;
+  --bg-tertiary:   #F2F2F7;
+  --bg-grouped:    #F2F2F7;
+
+  --label-primary:    #000000;
+  --label-secondary:  rgba(60,60,67,.6);
+  --label-tertiary:   rgba(60,60,67,.3);
+
+  --separator:  rgba(60,60,67,.29);
+  --fill:       rgba(120,120,128,.2);
+
+  --blue:    #007AFF;  --green:  #34C759;
+  --red:     #FF3B30;  --orange: #FF9500;
+  --purple:  #AF52DE;  --teal:   #5AC8FA;
+  --yellow:  #FFCC00;
+
+  --shadow-md: 0 2px 12px rgba(0,0,0,.12);
+  --shadow-lg: 0 6px 28px rgba(0,0,0,.18);
+}
