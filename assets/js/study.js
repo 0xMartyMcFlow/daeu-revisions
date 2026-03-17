@@ -10,7 +10,7 @@ import { icon }                                     from './icons.js';
 
 const app = () => document.getElementById('app');
 
-// ── ENTRÉE DECK ────────────────────────────────────────────
+// ── ENTRÉE DECK ──────────────────────────────────────────────
 
 export function renderStudy(deckId) {
   const deck = DECKS.find(d => d.id === deckId);
@@ -25,7 +25,7 @@ export function renderStudy(deckId) {
     <div class="view">
       <div style="display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-5)">
         <button class="btn btn-ghost btn-sm" id="back-home" style="gap:4px">${icon('CHEVRON_LEFT',16)} Accueil</button>
-        <span style="font-size:1.5rem">${deck.icon}</span>
+        <span style="color:${deck.color};display:flex;align-items:center">${icon(deck.iconKey, 24)}</span>
         <span style="font-weight:700;font-size:var(--text-md)">${deck.name}</span>
       </div>
 
@@ -74,7 +74,7 @@ export function renderStudy(deckId) {
     el.addEventListener('click', () => renderFiche(deck.id, el.dataset.fiche)));
 }
 
-// ── SESSION ───────────────────────────────────────────────
+// ── SESSION ───────────────────────────────────────────────────
 
 function startSession(deck, mode) {
   const progress = getProgress();
@@ -102,7 +102,7 @@ function startSession(deck, mode) {
   next();
 }
 
-// ── FLIP ──────────────────────────────────────────────────
+// ── FLIP ─────────────────────────────────────────────────────
 
 function renderFlip(deck, card, queue, idx, onGrade) {
   let flipped = false;
@@ -140,7 +140,7 @@ function renderFlip(deck, card, queue, idx, onGrade) {
     btn.addEventListener('click', () => { animPop(btn); onGrade(parseInt(btn.dataset.grade)); }));
 }
 
-// ── MCQ ───────────────────────────────────────────────────
+// ── MCQ ──────────────────────────────────────────────────────
 
 function renderMCQ(deck, card, queue, idx, onAnswer) {
   const others  = deck.cards.filter(c => c.id !== card.id);
@@ -173,7 +173,7 @@ function renderMCQ(deck, card, queue, idx, onAnswer) {
   });
 }
 
-// ── TYPE ───────────────────────────────────────────────────
+// ── TYPE ───────────────────────────────────────────────────────
 
 function renderType(deck, card, queue, idx, onAnswer) {
   app().innerHTML = `
@@ -202,9 +202,9 @@ function renderType(deck, card, queue, idx, onAnswer) {
     fb.innerHTML = `
       <div style="display:flex;align-items:center;gap:6px;font-weight:700;margin-bottom:var(--sp-2)">
         ${isCorrect ? icon('CHECK_CIRCLE', 18) : icon('XMARK_CIRCLE', 18)}
-        ${isCorrect ? 'Bien !' : 'À revoir'}
+        ${isCorrect ? 'Bien !' : 'À revoir'}
       </div>
-      <span style="color:var(--label-secondary);font-size:var(--text-xs)">Réponse attendue :</span>
+      <span style="color:var(--label-secondary);font-size:var(--text-xs)">Réponse attendue :</span>
       <pre style="white-space:pre-wrap;font-size:var(--text-sm);margin-top:4px">${card.b}</pre>
       <button class="btn btn-primary btn-full" style="margin-top:var(--sp-3)" id="type-next">Continuer</button>
     `;
@@ -214,7 +214,7 @@ function renderType(deck, card, queue, idx, onAnswer) {
   });
 }
 
-// ── FIN DE SESSION ──────────────────────────────────────────
+// ── FIN DE SESSION ──────────────────────────────────────────────
 
 function endSession(deck, correct, total) {
   const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
@@ -224,7 +224,7 @@ function endSession(deck, correct, total) {
   app().innerHTML = `
     <div class="view" style="text-align:center;padding-top:var(--sp-8)">
       <div style="display:flex;justify-content:center;margin-bottom:var(--sp-3)">${resultIcon}</div>
-      <h1 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;margin-bottom:var(--sp-2)">Session terminée !</h1>
+      <h1 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;margin-bottom:var(--sp-2)">Session terminée !</h1>
       <div style="font-size:4rem;font-weight:700;color:${pct >= 70 ? 'var(--green)' : 'var(--orange)'};font-family:var(--font-display);margin:var(--sp-4) 0">${pct}%</div>
       <p style="color:var(--label-secondary);margin-bottom:var(--sp-6)">${correct} / ${total} cartes correctes</p>
       <div style="display:flex;flex-direction:column;gap:var(--sp-3);max-width:320px;margin:0 auto">
@@ -246,7 +246,9 @@ function sessionHeader(deck, idx, total) {
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-2)">
         <button class="btn btn-ghost btn-sm" id="quit-session" style="gap:4px">${icon('XMARK',14)} Quitter</button>
         <span style="font-size:var(--text-sm);color:var(--label-secondary);font-weight:600">${idx + 1} / ${total}</span>
-        <span style="font-size:var(--text-sm);color:${deck.color};font-weight:700">${deck.icon} ${deck.name}</span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:var(--text-sm);color:${deck.color};font-weight:700">
+          <span style="display:flex;align-items:center">${icon(deck.iconKey, 14)}</span>${deck.name}
+        </span>
       </div>
       <div class="progress-bar">
         <div class="progress-fill" style="width:${pct}%;background:${deck.color}"></div>
